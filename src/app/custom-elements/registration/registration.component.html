@@ -1,0 +1,14 @@
+<pa-dynamic-form 
+  paHotKeys
+  (enterDown)="enterDown()"
+  #dynamicForm
+  [controls]="controls">
+</pa-dynamic-form>
+<pa-global-error>
+</pa-global-error>
+<pa-button
+  [async]="loading"
+  [disabled]="!dynamicForm?.form?.valid"
+  (clicked)="send()">
+  {{ locale.Registered }}
+</pa-button>

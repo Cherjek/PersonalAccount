@@ -1,0 +1,19 @@
+.pa {
+  &-login {
+    &-container {
+      .pa-dynamic-form-container {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &__forgot-password {
+      text-align: right;
+
+      & button {
+        padding-right: 0;
+        margin-bottom: .5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{ document?.name }}</h2>
+<mat-dialog-content>
+  <div>
+    <label>Текст документа</label>
+    <br>
+    {{ document?.text }}
+  </div>
+  <div>
+    <label>Дата</label>
+    <br>
+    {{ document?.dateTime }}
+  </div>
+  <div>
+    <label>Статус</label>
+    <br>
+    {{ document?.status?.name || '[Нет]' }}
+  </div>
+  <div>
+    <label>Вложения</label>
+    <br>
+    <div class="row center-v" *ngFor="let file of document?.attachments" (click)="loadFile(file?.id)">
+      <label class="col-auto p-1" for="fileDropRef">
+        <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="74" height="74" rx="20" fill="#E9EFF6"/>
+          <path d="M44.937 33.68C44.926 33.648 44.917 33.617 44.904 33.586C44.855 33.48 44.794 33.379 44.708 33.293L38.708 27.293C38.622 27.207 38.521 27.146 38.415 27.097C38.385 27.083 38.353 27.075 38.321 27.064C38.237 27.036 38.151 27.018 38.062 27.013C38.04 27.011 38.021 27 38 27H31C29.897 27 29 27.897 29 29V45C29 46.103 29.897 47 31 47H43C44.103 47 45 46.103 45 45V34C45 33.979 44.989 33.96 44.987 33.938C44.982 33.85 44.965 33.764 44.937 33.68ZM41.586 33H39V30.414L41.586 33ZM31 45V29H37V34C37 34.553 37.447 35 38 35H43L43.002 45H31Z" fill="black"/>
+        </svg>            
+      </label>
+      <div class="col p-1">    
+        <span>{{ file.name }}</span>
+      </div>
+    </div>
+  </div>  
+</mat-dialog-content>

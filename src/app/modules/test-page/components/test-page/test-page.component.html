@@ -1,0 +1,57 @@
+<div style="margin-left: 20px; padding-bottom: 50px;">
+  <div>
+    <h3>Checkbox</h3>
+    <div>
+      <h4>List of checkboxes</h4>
+      <pa-checkbox (checkEvent)="checked($event)" [items]="items"></pa-checkbox>
+      <div>Additional checkbox inner content</div>
+    <div>
+      <br/>
+      <h4>Single checkbox</h4>
+      <pa-checkbox>
+        Single
+      </pa-checkbox>
+    </div>
+    </div>
+  </div>
+  <hr />
+  <div>
+    <h3>Date picker</h3>
+    <pa-datepicker></pa-datepicker>
+    <div>
+      <p>Range</p>
+      <pa-datepicker [isRange]="true"></pa-datepicker>
+    </div>
+    <div>
+      <p>Disabled</p>
+      <pa-datepicker [disabled]="true"></pa-datepicker>
+    </div>
+  </div>
+  <hr/>
+  <div>
+    <h3>Inputs</h3>
+    <div style="width: 20%;">
+      <pa-input label="Number" [type]="'number'" [control]="control"></pa-input>
+      <pa-input label="Password" [type]="'password'" [control]="passwordControl"></pa-input>
+      <pa-input label="Email" [type]="'email'" [control]="mailControl"></pa-input>
+      <pa-input label="Phone" [type]="'phone'" [control]="phoneControl"></pa-input>
+      <pa-input [disabled]="true" label="Disabled" [type]="'phone'"></pa-input>
+    </div>
+  </div>
+  <hr/>
+  <div>
+    <h3>Combo box</h3>
+    <pa-combobox [options]="data2"></pa-combobox>
+    <pa-combobox [label]="'Disabled'" [disabled]="true" [options]="data2"></pa-combobox>
+  </div>
+  <hr/>
+  <div>
+    <h3>Buttons</h3>
+    <pa-button (clicked)="buttonTest($event, 'primary')">Default</pa-button>
+    <pa-button (clicked)="buttonTest($event, 'accent')" [color]="'accent'">Accent</pa-button>
+    <pa-button (clicked)="buttonTest($event, 'warning')" [color]="'warn'">Warning</pa-button>
+    <pa-button (clicked)="buttonTest($event, 'disabled')" [disabled]="true">Disabled</pa-button>
+    <pa-link (clicked)="buttonTest($event, 'link')">Link</pa-link>
+  </div>
+
+</div>

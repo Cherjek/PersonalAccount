@@ -1,0 +1,60 @@
+<input
+    style="display: none"
+    type="file"
+    #fileDropRef
+    id="fileDropRef"
+    multiple
+    (change)="fileBrowseHandler($event)" />
+
+<pa-dynamic-form 
+  paHotKeys
+  (enterDown)="enterDown()"
+  #dynamicForm
+  [controls]="controls">
+</pa-dynamic-form>
+<div class="row center-v border-dot" paDragDrop (fileDropped)="onFileDropped($event)">
+  <label class="col-auto p-1" for="fileDropRef">
+    <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="74" height="74" rx="20" fill="#E9EFF6"/>
+      <path d="M42.004 30C42.002 30 42.001 30 42 30H41.999H34C32.162 30 30.414 30.737 29.076 32.076C27.737 33.415 27 35.163 27 37C27 38.838 27.737 40.586 29.076 41.924C30.414 43.263 32.162 44 34 44H42V42H34C32.697 42 31.45 41.471 30.49 40.51C29.529 39.55 29 38.303 29 37C29 35.698 29.529 34.451 30.49 33.49C31.45 32.529 32.697 32 34 32H42V31L42.001 32C42.002 32 42.003 32 42.004 32C42.794 32 43.543 32.314 44.113 32.886C44.684 33.457 44.999 34.208 45 35.002C45.001 35.791 44.687 36.541 44.116 37.112C43.543 37.684 42.791 37.999 42 38H34C33.744 38 33.495 37.893 33.302 37.7C33.107 37.505 33 37.256 33 37C33 36.748 33.11 36.493 33.301 36.302C33.495 36.107 33.744 36 34 36H42V34H34C33.21 34 32.459 34.315 31.886 34.889C31.314 35.461 31 36.211 31 37C31 37.789 31.314 38.54 31.888 39.114C32.46 39.686 33.211 40 34 40H42.001C43.325 39.999 44.578 39.477 45.529 38.527C46.48 37.577 47.002 36.323 47 34.999C46.999 33.673 46.476 32.42 45.528 31.472C44.58 30.522 43.328 30 42.004 30Z" fill="black"/>
+    </svg>
+  </label>
+  <div class="col p-1">
+    <span>Прикрепить файлы</span>
+  </div>
+</div>
+<div class="row center-v" *ngFor="let file of files; index as i">
+  <label class="col-auto p-1" for="fileDropRef">
+    <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="74" height="74" rx="20" fill="#E9EFF6"/>
+      <path d="M44.937 33.68C44.926 33.648 44.917 33.617 44.904 33.586C44.855 33.48 44.794 33.379 44.708 33.293L38.708 27.293C38.622 27.207 38.521 27.146 38.415 27.097C38.385 27.083 38.353 27.075 38.321 27.064C38.237 27.036 38.151 27.018 38.062 27.013C38.04 27.011 38.021 27 38 27H31C29.897 27 29 27.897 29 29V45C29 46.103 29.897 47 31 47H43C44.103 47 45 46.103 45 45V34C45 33.979 44.989 33.96 44.987 33.938C44.982 33.85 44.965 33.764 44.937 33.68ZM41.586 33H39V30.414L41.586 33ZM31 45V29H37V34C37 34.553 37.447 35 38 35H43L43.002 45H31Z" fill="black"/>
+    </svg>
+  </label>
+  <div class="col p-1">
+    <span>{{ file.name }}</span>
+  </div>
+  <div class="col-auto p-1" (click)="removeFile(i)">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7.50439 30C7.50439 31.6545 8.84989 33 10.5044 33H25.5044C27.1589 33 28.5044 31.6545 28.5044 30V12H31.5044V9H27.0044H25.5044V6C25.5044 4.3455 24.1589 3 22.5044 3H13.5044C11.8499 3 10.5044 4.3455 10.5044 6V9H9.00439H4.50439V12H7.50439V30ZM13.5044 6H22.5044V9H13.5044V6ZM12.0044 12H24.0044H25.5044L25.5059 30H10.5044V12H12.0044Z" fill="#DD4C4C"/>
+      <path d="M13.5044 15H16.5044V27H13.5044V15ZM19.5044 15H22.5044V27H19.5044V15Z" fill="#DD4C4C"/>
+    </svg>
+  </div>
+</div>
+<ng-container [ngSwitch]="meterDevicesAppService.success">
+  <ng-container *ngSwitchCase="true">
+    {{ locale.meterDevices.SuccessAddMeter }}
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <pa-global-error>
+    </pa-global-error>
+  </ng-container>
+</ng-container>
+<div class="pa-mdc__add-button">
+  <pa-button 
+    [async]="loading"
+    [disabled]="!dynamicForm?.form?.valid"
+    (click)="send()">
+    {{ locale.common.Add }}
+  </pa-button>
+</div>
+

@@ -1,0 +1,44 @@
+.pa {
+  &-nav {
+    border-right: solid $bluish-dark 1px;
+
+    &__header {
+      color: $main-gray;
+      margin-bottom: 4.375rem;
+
+      &-text {
+        font-size: 22px;
+        font-weight: 800;
+        text-align: center;
+        margin-top: 2.5rem !important;
+      }
+    }
+
+    &__link {
+      &-text {
+        font-weight: 600;
+      }
+
+      &-container {
+        color: $main-gray;
+        display: flex;
+        cursor: pointer;
+        margin-bottom: 2.5rem;
+
+        & .pa-link {
+          color: inherit !important;
+        }
+      }
+
+      &-icon {
+        display: inline-block;
+        border-radius: 50%;
+        border: solid 1px;
+        height: 15px;
+        width: 15px;
+        margin-right: 10px;
+        background-color: $main-gray;
+      }
+    }
+  }
+}

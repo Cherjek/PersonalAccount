@@ -1,0 +1,9 @@
+<button
+  class="pa-button"
+  (click)="onButtonClick($event)"
+  [disabled]="disabled || async"
+  mat-raised-button
+  [color]="color">
+  <ng-content></ng-content>
+</button>
+<mat-progress-bar class="button__progress-bar" [ngClass]="{'show':async}" mode="indeterminate"></mat-progress-bar>

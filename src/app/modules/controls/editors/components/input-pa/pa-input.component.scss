@@ -1,0 +1,12 @@
+.pa-input {
+  width: 100%;
+  &-icons {
+    display: flex;
+    &__icon {
+      cursor: pointer;
+    }
+    &__password {
+      margin-left: 10px;
+    }
+  }
+}

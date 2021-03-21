@@ -1,0 +1,56 @@
+<mat-form-field class="pa-input" appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+
+    <input
+      class="pa-input__input"
+      matInput
+      [required]="required"
+      [formControl]="control"
+      [type]="type === 'password' ? (hidePassword ? 'password' : 'text') : type"
+      [placeholder]="placeholder">
+      <div mat-icon-button matSuffix>
+        <span class="pa-input-icons">
+          <mat-icon
+            *ngIf="control.value"
+            class="pa-input-icons__icon" (click)="control.setValue(null)">close</mat-icon>
+        <mat-icon
+          class="pa-input-icons__password pa-input-icons__icon"
+          *ngIf="control.value && type === 'password'"
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword">
+          {{hidePassword ? 'visibility_off' : 'visibility'}}
+        </mat-icon>
+      </span>
+    </div>
+
+  <!-- <ng-container [ngSwitch]="type">
+    <ng-container *ngSwitchCase="'password'">
+      <input matInput
+        [placeholder]="placeholder"
+        [type]="hidePassword ? 'password' : 'text'"
+        [formControl]="control"
+        [required]="required">
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" attr.aria-label="Hide password" [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <button mat-button *ngIf="control.value" matSuffix mat-icon-button aria-label="Clear" (click)="control.setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <input matInput
+        [placeholder]="placeholder"
+        [formControl]="control"
+        [required]="required">
+      <button mat-button *ngIf="control.value" matSuffix mat-icon-button aria-label="Clear" (click)="control.setValue(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>   -->
+
+  <mat-error *ngIf="control.errors" [innerHtml]="control.errors | validateError"></mat-error>
+  <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  <mat-hint>Hint</mat-hint> -->
+
+</mat-form-field>

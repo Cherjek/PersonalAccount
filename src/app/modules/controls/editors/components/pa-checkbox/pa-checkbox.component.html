@@ -1,0 +1,31 @@
+<ng-container *ngTemplateOutlet="items && items.length ? checkboxMultiple : checkboxTemplate"></ng-container>
+<ng-template #checkboxMultiple>
+  <ul [ngClass]="checkboxItemsParentClass">
+    <li class="pa-checkbox-list__item" [ngClass]="checkboxTopItemClass">
+      <mat-checkbox
+        [color]="color"
+        (change)="onTopCheckboxChange($event)"
+        #topCheckbox
+        [labelPosition]="labelPosition"
+        [disabled]="topCheckboxDisabled">
+        {{topCheckboxText}}
+  </mat-checkbox>
+    </li>
+    <li class="pa-checkbox-list__item" [ngClass]="checkboxItemClass" *ngFor="let item of items">
+      <ng-template *ngTemplateOutlet="checkboxTemplate; context: {$implicit: {item: item, topCheckbox: topCheckbox}}">
+      </ng-template>
+      {{item?.Name}}
+    </li>
+  </ul>
+</ng-template>
+<ng-template let-data #checkboxTemplate>
+  <mat-checkbox
+    [color]="color"
+    [indeterminate]="indeterminate"
+    [checked]="data?.item?.IsChecked || checked"
+    [labelPosition]="data?.item?.LabelPosition || labelPosition"
+    [disabled]="data?.item?.Disabled || disabled"
+    (change)="onCheckChange($event, data)">
+    <ng-content></ng-content>
+  </mat-checkbox>
+</ng-template>

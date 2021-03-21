@@ -1,0 +1,55 @@
+<form class="pa-dynamic-form-container" [formGroup]="form">
+
+  <ng-container *ngFor="let control of controls">
+    <!-- <app-question [question]="control" [form]="form"></app-question> -->
+
+    <ng-container [ngSwitch]="control.controlType">
+
+      <ng-container *ngSwitchCase="'textbox'">
+
+        <ng-container [ngSwitch]="control.type">
+
+          <ng-container *ngSwitchCase="'string'">
+            <pa-input
+            [label]="control.label"
+            [placeholder]="control.placeholder"
+            [control]="controlsForm[control.key]"
+            [required]="control.required"></pa-input>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'password'">
+            <pa-input
+            [label]="control.label"
+            [placeholder]="control.placeholder"
+            [type]="'password'"
+            [control]="controlsForm[control.key]"
+            [required]="control.required"></pa-input>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'email'">
+            <pa-input
+            [label]="control.label"
+            [placeholder]="control.placeholder"
+            [type]="'email'"
+            [control]="controlsForm[control.key]"
+            [required]="control.required"></pa-input>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'phone'">
+            <pa-input
+            [label]="control.label"
+            [placeholder]="control.placeholder"
+            [type]="'phone'"
+            [control]="controlsForm[control.key]"
+            [required]="control.required"></pa-input>
+          </ng-container>
+
+        </ng-container>
+
+      </ng-container>
+
+    </ng-container>
+
+  </ng-container>
+
+</form>

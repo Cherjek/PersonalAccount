@@ -1,0 +1,68 @@
+<!-- <style>
+  @import url('assets/content/style/home.css');
+</style> -->
+<div class="grid pa-home">
+  <header id="supportHeader">
+    <div class="pa-home-top-header">
+      <div class="pa-home__tech-support">
+        <div class="pa-home__tech-support-text">
+          <p class="pa-home__tech-support-text-header">{{locale.TechnicalSupport}}:</p>
+          <pa-link class="pa-home__tech-support-link">
+            <p class="pa-home__tech-support-text-sub-header">support@mail.com</p>
+          </pa-link>
+        </div>
+        <div class="pa-home__user">
+          <div class="pa-home__user-img"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <header id="pageHeader">
+    <div class="row">
+      <div class="col">
+        <p class="pa-home__header-text">
+          <ng-container *ngIf="applicationService?.config?.headerText || applicationService?.config?.headerTemplate; else loading">
+            <ng-container *ngIf="applicationService?.config?.headerText">
+              {{ applicationService?.config?.headerText }}
+            </ng-container> 
+            <ng-container *ngIf="applicationService?.config?.headerTemplate">
+              <ng-template [ngTemplateOutlet]="applicationService?.config?.headerTemplate"></ng-template>
+            </ng-container>           
+          </ng-container>
+          <ng-template #loading>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </ng-template>
+        </p>
+      </div>
+      <!-- <div class="col-auto">
+        <a (click)="exit()">
+          {{ locale.Exit }}
+        </a>
+      </div> -->
+    </div>
+  </header>
+  <article id="mainArticle">
+    <router-outlet></router-outlet>
+  </article>
+  <nav class="pa-nav" id="mainNav">
+    <header class="pa-nav__header">
+      <p class="pa-nav__header-text">{{locale.Title}}</p>
+    </header>
+    <div class="pa-nav-links">
+      <div class="pa-nav__link-container pa-active--link">
+        <pa-link>
+          <span class="pa-nav__link-icon pa-active--icon"></span>
+          <span class="pa-nav__link-text">{{locale.MeterReadings}}</span>
+        </pa-link>
+      </div>
+      <div class="pa-nav__link-container pa-disabled--link">
+        <pa-link>
+          <span class="pa-nav__link-icon"></span>
+          <span class="pa-nav__link-text">{{locale.Documents}}</span>
+        </pa-link>
+      </div>
+    </div>
+  </nav>
+  <!-- <div id="siteAds">Ads</div> -->
+  <!-- <footer id="pageFooter">Footer</footer> -->
+</div>

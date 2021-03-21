@@ -1,0 +1,203 @@
+<!-- <div class="row">
+  <div class="col">
+  </div>
+  <div class="col-auto ">
+
+  </div>
+</div> -->
+<div class="row navigate pa-md">
+  <div class="col pa-md-nav-container">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link *ngFor="let tab of tabs"
+         (click)="activeLink = tab.id; nodeClick();"
+         [active]="activeLink == tab.id"> {{tab.name}} </a>
+    </nav>
+    <pa-link class="button-new-meter" (click)="addMeter()">
+    <span class="pa-active--link pa-md-nav__add-device">+ Добавить прибор</span>
+  </pa-link>
+  </div>
+</div>
+<header class="header pa-md__header">
+  <div class="row center-v pa-md__header-container">
+    <div class="col pa-md__header-child">
+      <p class="pa-md__header-child-text">{{ (equipments == null || !equipments.length) ? 'Нет добавленных приборов учета' : 'Приборы учета' }}</p>
+    </div>
+    <div class="col-auto pa-md-view-select">
+      <mat-form-field appearance="fill">
+        <!-- <mat-label>Favorite food</mat-label> -->
+        <mat-select panelClass="mdPanel" [formControl]="groupViewControl">
+          <mat-option *ngFor="let view of groupView" [value]="view">
+            {{ view.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</header>
+<ng-container [ngSwitch]="groupViewControl?.value?.id === 2">
+  <ng-container *ngSwitchCase="true">
+    <ng-container *ngIf="groups?.length; else noEquipment">
+      <div class="row" *ngFor="let group of groups">
+        <div class="col">
+          <h2>{{ group.displayText }}</h2>
+          <ng-template [ngTemplateOutlet]="templateEqs" [ngTemplateOutletContext]="{eqs:group.equipments}"></ng-template>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <ng-template [ngTemplateOutlet]="templateEqs" [ngTemplateOutletContext]="{eqs:equipments}"></ng-template>
+  </ng-container>
+</ng-container>
+
+<ng-template #templateEqs let-eqs="eqs">
+  <div class="row pa-md-tab-body">
+    <ng-container *ngIf="eqs.length;else noEquipment">
+      <div class="p-1" *ngFor="let eq of eqs">
+
+        <mat-card class="equipment-card pa-md-card">
+          <div class="pa-md-card-header">
+            <div>
+              <mat-card-header>
+                <div mat-card-avatar>
+                  <ng-container [ngSwitch]="eq?.type?.code">
+                    <ng-container *ngSwitchCase="'EMeter'">
+                      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="46" height="46" rx="23" fill="#DAC71B"/>
+                        <path d="M29.168 21H25L25.806 16.165C25.907 15.555 25.438 15 24.819 15H19.667C19.178 15 18.761 15.354 18.681 15.835L17.014 25.835C16.912 26.445 17.382 27 18 27H22V35L30.01 22.541C30.438 21.875 29.96 21 29.168 21Z" fill="white"/>
+                      </svg>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'GMeter'">
+                      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="46" height="46" rx="23" fill="#79D7D1"/>
+                        <path d="M27.543 19.028C27.52 20.531 27.02 22.566 24.676 23.355C25.41 21.609 25.522 19.938 25.002 18.376C24.307 16.279 21.988 14.641 20.445 13.749C19.918 13.443 19.242 13.823 19.252 14.432C19.272 15.544 18.934 17.169 17.293 18.81C15.107 20.994 14 23.251 14 25.517C14 28.362 16 32 20 32C15.959 27.959 19 24.517 19 24.517C19.846 30.431 23.988 32 26 32C27.711 32 31 30.75 31 25.552C31 22.419 29.668 20.041 28.615 18.653C28.268 18.195 27.551 18.455 27.543 19.028Z" fill="white"/>
+                      </svg>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'WaterMeter'">
+                      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="46" height="46" rx="23" fill="#2883ED"/>
+                        <path d="M23.602 13.447C23.244 13.17 22.753 13.172 22.392 13.446C20.51 14.879 14.973 19.547 15 25C15 29.411 18.589 33 23 33C27.412 33 31 29.411 31 25.005C31.027 19.64 25.467 14.889 23.602 13.447Z" fill="white"/>
+                      </svg>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'HeatMeter'">
+                      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="46" height="46" rx="23" fill="#2ADA1B"/>
+                        <path d="M17.995 23C17.995 25.761 20.241 28.007 23.002 28.007C25.763 28.007 28.009 25.761 28.009 23C28.009 20.239 25.763 17.993 23.002 17.993C20.241 17.993 17.995 20.239 17.995 23ZM22 30H24V33H22V30ZM22 13H24V16H22V13ZM13 22H16V24H13V22ZM30 22H33V24H30V22Z" fill="white"/>
+                        <path d="M16.6371 30.7784L15.2229 29.3642L17.3443 27.2429L18.7585 28.6572L16.6371 30.7784Z" fill="white"/>
+                        <path d="M27.2422 17.3436L29.3642 15.2215L30.7785 16.6357L28.6565 18.7578L27.2422 17.3436Z" fill="white"/>
+                        <path d="M17.3437 18.7586L15.223 16.6367L16.6377 15.2229L18.7584 17.3448L17.3437 18.7586Z" fill="white"/>
+                        <path d="M30.7778 29.3635L29.3636 30.7778L27.2415 28.6558L28.6557 27.2415L30.7778 29.3635Z" fill="white"/>
+                      </svg>
+                    </ng-container>
+                  </ng-container>
+                </div>
+                <mat-card-title class="pa-md-card__title">{{ eq.name }}</mat-card-title>
+                <mat-card-subtitle class="pa-md-card__sub-title">{{ groupViewControl?.value?.id === 1 ? eq?.type?.displayText : '' }}</mat-card-subtitle>
+              </mat-card-header>
+            </div>
+            <div class="pa-md-card-header__ellipsis">
+              <svg fill="#147388" height="10pt" viewBox="-192 0 512 512" width="10pt" xmlns="http://www.w3.org/2000/svg"><path d="m128 256c0 35.347656-28.652344 64-64 64s-64-28.652344-64-64 28.652344-64 64-64 64 28.652344 64 64zm0 0"/><path d="m128 64c0 35.347656-28.652344 64-64 64s-64-28.652344-64-64 28.652344-64 64-64 64 28.652344 64 64zm0 0"/><path d="m128 448c0 35.347656-28.652344 64-64 64s-64-28.652344-64-64 28.652344-64 64-64 64 28.652344 64 64zm0 0"/></svg>
+            </div>
+          </div>
+          <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+          <mat-card-content class="pa-md-card-content">
+            <ng-template #tagsTemp let-tileRows="tileRows">
+              <div class="row tag-value pa-md-card__list-container" *ngFor="let tileRow of tileRows; index as i" [ngClass]="{'borde-bottom-line': i < tileRows?.length - 1}">
+                <div class="col ellipsis-text pa-md-card__list-item">
+                  {{ tileRow?.displayText || '[Без названия]' }}
+                </div>
+                <div class="col-auto">
+                  <ng-container *ngIf="tileRow?.tag?.value; else nullTemplate">
+                    <ng-container *ngIf="tileRow?.tag?.value.valueBool">
+                      {{ tileRow?.tag?.value.valueBool ? 1 : 0 }}
+                    </ng-container>
+                    <ng-container *ngIf="tileRow?.tag?.value.valueData">
+                      {{ tileRow?.tag?.value.valueData }}
+                    </ng-container>
+                    <ng-container *ngIf="tileRow?.tag?.value.valueFloat">
+                      {{ tileRow?.tag?.value.valueFloat | number : '1.3-3' }}
+                    </ng-container>
+                    <ng-container *ngIf="tileRow?.tag?.value.valueInt">
+                      {{ tileRow?.tag?.value.valueInt }}
+                    </ng-container>
+                  </ng-container>
+                  <ng-template #nullTemplate>
+                    0
+                  </ng-template>
+                </div>
+                <div class="col-auto">
+                  &nbsp;&nbsp;{{ tileRow?.tag?.valueName }}
+                </div>
+              </div>
+            </ng-template>
+            <ng-template [ngTemplateOutlet]="tagsTemp" [ngTemplateOutletContext]="{tileRows:(eq?.tileRows || []).slice(0,3)}"></ng-template>
+            {{ eq.Id }}
+            <mat-accordion>
+              <mat-expansion-panel hideToggle [expanded]="showMoreTags[eq.id]" style="box-shadow: none; margin: 0 -24px; background-color: transparent;">
+                <!-- <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    This is the expansion title
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    This is a summary of the content
+                  </mat-panel-description>
+                </mat-expansion-panel-header> -->
+                <ng-template [ngTemplateOutlet]="tagsTemp" [ngTemplateOutletContext]="{tileRows:(eq?.tileRows || []).slice(3)}"></ng-template>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="pa-md-card-actions__button">
+              <pa-button (click)="showMoreTags[eq.id]=!showMoreTags[eq.id]" [hidden]="eq?.tileRows?.length < 4" mat-button>{{ !showMoreTags[eq.id] ? 'Показать еще' : 'Скрыть' }}</pa-button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+<ng-template #noEquipment>
+  <div class="pa-md-card-empty">
+    <mat-card *ngFor="let empty of emptyEquipment" class="equipment-card pa-md-card pa-md-card-empty__card">
+      <div class="pa-md-card-empty__content pa-active--link">
+        <pa-link class="pa-md-card-empty__content-links">
+          <span class="pa-active--link pa-md-card-empty__content-link">
+            {{empty?.title}}
+          </span>
+          <span *ngIf="empty.content" class="pa-active--link pa-md-card-empty__content-link">
+            {{empty?.content}}
+          </span>
+        </pa-link>
+      </div>
+    </mat-card>
+  </div>
+</ng-template>
+
+<!-- <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="46" height="46" rx="23" fill="#2ADA1B"/>
+  <path d="M17.995 23C17.995 25.761 20.241 28.007 23.002 28.007C25.763 28.007 28.009 25.761 28.009 23C28.009 20.239 25.763 17.993 23.002 17.993C20.241 17.993 17.995 20.239 17.995 23ZM22 30H24V33H22V30ZM22 13H24V16H22V13ZM13 22H16V24H13V22ZM30 22H33V24H30V22Z" fill="white"/>
+  <path d="M16.6371 30.7784L15.2229 29.3642L17.3443 27.2429L18.7585 28.6572L16.6371 30.7784Z" fill="white"/>
+  <path d="M27.2422 17.3436L29.3642 15.2215L30.7785 16.6357L28.6565 18.7578L27.2422 17.3436Z" fill="white"/>
+  <path d="M17.3437 18.7586L15.223 16.6367L16.6377 15.2229L18.7584 17.3448L17.3437 18.7586Z" fill="white"/>
+  <path d="M30.7778 29.3635L29.3636 30.7778L27.2415 28.6558L28.6557 27.2415L30.7778 29.3635Z" fill="white"/>
+</svg>
+<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="46" height="46" rx="23" fill="#2883ED"/>
+  <path d="M23.602 13.447C23.244 13.17 22.753 13.172 22.392 13.446C20.51 14.879 14.973 19.547 15 25C15 29.411 18.589 33 23 33C27.412 33 31 29.411 31 25.005C31.027 19.64 25.467 14.889 23.602 13.447Z" fill="white"/>
+</svg>
+<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="46" height="46" rx="23" fill="#DD4C4C"/>
+  <path d="M23.602 13.447C23.244 13.17 22.753 13.172 22.392 13.446C20.51 14.879 14.973 19.547 15 25C15 29.411 18.589 33 23 33C27.412 33 31 29.411 31 25.005C31.027 19.64 25.467 14.889 23.602 13.447Z" fill="white"/>
+</svg>
+<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="46" height="46" rx="23" fill="#79D7D1"/>
+  <path d="M27.543 19.028C27.52 20.531 27.02 22.566 24.676 23.355C25.41 21.609 25.522 19.938 25.002 18.376C24.307 16.279 21.988 14.641 20.445 13.749C19.918 13.443 19.242 13.823 19.252 14.432C19.272 15.544 18.934 17.169 17.293 18.81C15.107 20.994 14 23.251 14 25.517C14 28.362 16 32 20 32C15.959 27.959 19 24.517 19 24.517C19.846 30.431 23.988 32 26 32C27.711 32 31 30.75 31 25.552C31 22.419 29.668 20.041 28.615 18.653C28.268 18.195 27.551 18.455 27.543 19.028Z" fill="white"/>
+</svg>
+<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="46" height="46" rx="23" fill="#DAC71B"/>
+  <path d="M29.168 21H25L25.806 16.165C25.907 15.555 25.438 15 24.819 15H19.667C19.178 15 18.761 15.354 18.681 15.835L17.014 25.835C16.912 26.445 17.382 27 18 27H22V35L30.01 22.541C30.438 21.875 29.96 21 29.168 21Z" fill="white"/>
+</svg>
+<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="46" height="46" rx="23" fill="#ACB6BC"/>
+  <path d="M20 31H26V33H20V31ZM27.906 24.712C28.936 23.506 30 22.259 30 20C30 16.141 26.859 13 23 13C19.141 13 16 16.141 16 20C16 22.285 17.067 23.528 18.101 24.73C18.459 25.148 18.83 25.581 19.185 26.079C19.329 26.285 19.565 27.075 19.776 28H18.984V30H20.162H25.837H27.016V28H26.226C26.439 27.073 26.676 26.281 26.819 26.075C27.171 25.572 27.545 25.135 27.906 24.712Z" fill="white"/>
+</svg> -->

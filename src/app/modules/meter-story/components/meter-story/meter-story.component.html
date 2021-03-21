@@ -1,0 +1,30 @@
+<div class="row navigate pa-md">
+  <div class="col pa-md-nav-container">
+    <nav mat-tab-nav-bar>
+      <a
+        mat-tab-link
+        *ngFor="let tab of tabs"
+        [routerLink]="[tab.code]"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [active]="rla.isActive"
+      >
+        {{ tab.name }}
+      </a>
+    </nav>
+  </div>
+</div>
+<ng-template #header>
+  <div class="row">
+    <div class="col-auto p-1">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="46" height="46" rx="12" fill="#E9EFF6"/>
+        <path d="M23.707 28.293L19.414 24H29V22H19.414L23.707 17.707L22.293 16.293L15.586 23L22.293 29.707L23.707 28.293Z" fill="#1D3557"/>
+      </svg>        
+    </div>
+    <div class="col-auto p-1">
+      {{ equipment?.name }}
+    </div>
+  </div>
+</ng-template>
+<router-outlet></router-outlet>

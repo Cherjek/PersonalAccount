@@ -1,0 +1,10 @@
+.pa-button {
+  width: 100%;
+}
+.button__progress-bar {
+  margin-top: -2px;
+  visibility: hidden;
+  &.show {
+    visibility: visible;
+  }
+}

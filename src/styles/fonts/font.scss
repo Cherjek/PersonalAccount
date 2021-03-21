@@ -1,0 +1,15 @@
+@font-face {
+  font-family: Gilroy;
+  src: url(../../assets/fonts/Gilroy-Light.otf) format("opentype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(../../assets/fonts/Gilroy-ExtraBold.otf) format("opentype");
+  font-weight: 800;
+}
+
+* {
+  font-family: Gilroy, Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,0 +1,21 @@
+<form class="">
+  <mat-form-field appearance="outline" class="">
+    <mat-label>{{label}}</mat-label>
+    <input type="text"
+           [placeholder]="placeholder"
+           aria-label="label"
+           matInput
+           [formControl]="formControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete
+        (closed)="dropdownClosed.emit($event)"
+        (opened)="dropdownOpened.emit($event)"
+        (optionSelected)="itemSelected.emit($event)"
+      autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

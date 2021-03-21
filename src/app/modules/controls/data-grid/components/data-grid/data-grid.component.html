@@ -1,0 +1,38 @@
+<mat-form-field style="width: 100%;">
+  <mat-label>{{ locale.Search }}</mat-label>
+  <input matInput (keyup)="applyFilter($event)" #input>
+</mat-form-field>
+<mat-table matSort [dataSource]="dataSourceMat" class="mat-elevation-z8">
+  <ng-container [matColumnDef]="dcolumn" *ngFor="let dcolumn of displayedColumns; index as i">
+    <mat-header-cell mat-sort-header *matHeaderCellDef> {{(columns || [])[i].label}} </mat-header-cell>
+    <mat-cell *matCellDef="let element" [ngClass]="{'not-view': element.viewed != null ? !element.viewed : false}">
+      <ng-template [ngTemplateOutlet]="cell" [ngTemplateOutletContext]="{row: element, col: dcolumn, type: (columns || [])[i].dataType, value:(columns || [])[i].calc ? (columns || [])[i].calc(element, dcolumn) : element[dcolumn]}">
+      </ng-template>
+      <ng-template #cell let-type="type" let-value="value" let-col="col" let-row="row">
+        <ng-container [ngSwitch]="type">
+          <ng-container *ngSwitchCase="'link'">
+            <a (click)="cellClickEv(row, col)">
+              {{ value }}
+            </a>
+          </ng-container>
+          <ng-container *ngSwitchCase="'float'">
+              {{ value | number : '1.3-3' }}
+          </ng-container>
+          <ng-container *ngSwitchCase="'date'">
+
+          </ng-container>
+          <ng-container *ngSwitchCase="'date-time'">
+
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            {{ value }}
+          </ng-container>
+        </ng-container>
+      </ng-template>      
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>  
+</mat-table>
+<mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 100]"></mat-paginator>

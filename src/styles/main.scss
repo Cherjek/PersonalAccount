@@ -1,0 +1,272 @@
+@import './variables/variables';
+@import './custom-elements/login';
+@import './core/home';
+@import './core/nav';
+@import './core/meter-devices';
+
+.pa {
+  &-parent {
+    height: auto !important;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: linear-gradient(to bottom left, transparent 41.5%, $main-gray 35%) top/100% 140%;
+    background-repeat: no-repeat;
+
+    & .pa-button {
+      width: 240px;
+      height: 45px;
+    }
+
+    & .pa-link {
+      color: $main-green;
+    }
+  }
+
+  &-auth {
+    &-text {
+      max-width: 50%;
+      color: $lighter-dark;
+    }
+
+    &__link {
+      text-decoration: none;
+      // font-weight: 500;
+    }
+
+    &__header {
+      color: $main-dark;
+      font-weight: 800;
+      line-height: 124%;
+    }
+  }
+
+  &-element-parent {
+    max-width: 20rem;
+    color: $lighter-dark;
+  }
+
+  &-global-error {
+    color: $main-red !important;
+  }
+
+  &-active--link {
+    color: $main-green;
+  }
+
+  &-disabled--link {
+    & .mat-button-focus-overlay {
+      background-color: white !important;
+    }
+
+    & button {
+      cursor: default !important;
+    }
+  }
+
+  &-active--icon {
+    background-color: $main-green;
+  }
+
+  &-dialog-panel {
+    margin-right: 10px !important;
+  }
+}
+
+
+/*
+  Device = Desktops
+  Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+
+  .pa {
+    &-auth {
+      &-text {
+        max-width: 40%;
+      }
+
+      &__header {
+        font-size: 3.25rem;
+
+        &-sub {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+  }
+
+}
+
+/*
+  Device = Laptops, Desktops
+  Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+  .pa {
+    // &-parent {
+    //   // background: linear-gradient(to bottom left, transparent 35.5%, #f0f0f0 24%) top/100% 140%;
+    // }
+
+    &-auth {
+      &-text {
+        max-width: 45%;
+      }
+
+      &__header {
+        font-size: 2.8rem;
+
+        &-sub {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+}
+
+// @media (min-width: 1065px) and (max-width: 1350px) {
+
+//   .pa {
+//     &-parent {
+//       // background: linear-gradient(to bottom left, transparent 35.5%, #f0f0f0 24%) top/100% 140%;
+//     }
+
+//     &-auth {
+//       &__header {
+//         font-size: 2.2rem;
+
+//         &-sub {
+//           font-size: 1.2rem;
+//         }
+//       }
+//     }
+//   }
+
+// }
+
+/*
+  Device = Tablets, Ipads (portrait)
+  Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .pa {
+    &-parent {
+      flex-direction: column;
+    }
+
+    &-auth {
+      &-text {
+        max-width: 50%;
+        text-align: center;
+      }
+
+      &__header {
+        font-size: 2.2rem;
+
+        &-sub {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+}
+
+/*
+  Device = Tablets, Ipads (landscape)
+  Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+  .pa {
+
+    &-parent {
+      flex-direction: column;
+    }
+
+    &-auth {
+      &-text {
+        max-width: 50%;
+        text-align: center;
+      }
+
+      &__header {
+        font-size: 2.2rem;
+
+        &-sub {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+}
+
+/*
+  Device = Low Resolution Tablets, Mobiles (Landscape)
+  Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  .pa {
+    &-parent {
+      flex-direction: column;
+    }
+
+    &-auth {
+      &-text {
+        max-width: 50%;
+        text-align: center;
+      }
+
+      &__header {
+        font-size: 2rem;
+
+        &-sub {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+
+}
+
+/*
+  Device = Most of the Smartphones Mobiles (Portrait)
+  Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 0px) and (max-width: 480px) {
+
+  .pa {
+    &-parent {
+      flex-direction: column;
+    }
+
+    &-auth {
+      &-text {
+        max-width: 50%;
+        text-align: center;
+      }
+
+      &__header {
+        font-size: 1.5rem;
+
+        &-sub {
+          font-size: .4rem;
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,40 @@
+.grid {
+  display: grid;
+  /* grid-template-areas:
+    "header header header"
+    "nav article ads"
+    "footer footer footer"; */
+  grid-template-areas:
+    "nav header"
+    "nav article"
+    "footer footer";
+  /* grid-template-rows: 60px 1fr 60px;
+  grid-template-columns: 20% 1fr 15%; */
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-columns: 20% 1fr;
+  grid-gap: 10px;
+  height: 100vh;
+  margin: 0;
+}
+.grid > header,
+.grid > footer,
+.grid > article,
+.grid > nav,
+.grid > div {
+  padding: 20px;
+}
+#pageHeader {
+  grid-area: header;
+}
+#pageFooter {
+  grid-area: footer;
+}
+#mainArticle {
+  grid-area: article;
+}
+#mainNav {
+  grid-area: nav;
+}
+#siteAds {
+  grid-area: ads;
+}

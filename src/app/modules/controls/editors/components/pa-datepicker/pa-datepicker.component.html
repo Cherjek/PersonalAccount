@@ -1,0 +1,31 @@
+<mat-form-field *ngIf="!isRange" appearance="outline">
+  <mat-label>{{dateTitle}}</mat-label>
+  <input
+    [formControl]="date"
+    [disabled]="disabled"
+    matInput
+    (dateInput)="dateEvent.emit($event.value)"
+    [matDatepicker]="picker">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field *ngIf="isRange" appearance="outline">
+  <mat-label>{{dateTitle}}</mat-label>
+  <mat-date-range-input [rangePicker]="picker">
+    <input
+      [formControl]="startDate"
+      [disabled]="disabled"
+      (dateInput)="startDateEvent.emit($event.value)"
+      matStartDate [placeholder]="startDateTitle">
+    <input
+    [formControl]="endDate"
+    [min]="startDate.value"
+    #endInput
+    (dateInput)="endDateEvent.emit($event.value)"
+    matEndDate [placeholder]="endDateTitle">
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+

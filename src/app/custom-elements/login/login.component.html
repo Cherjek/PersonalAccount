@@ -1,0 +1,22 @@
+<pa-dynamic-form 
+  paHotKeys
+  (enterDown)="enterDown()"
+  #dynamicForm
+  [controls]="controls">
+</pa-dynamic-form>
+<a *ngIf="configForm.registrationLink"
+  [routerLink]="['registration']">
+  {{ locale.Registration }}
+</a>
+<div *ngIf="configForm.recoveryLink" class="pa-login__forgot-password">
+  <pa-link
+    [routerLink]="['recovery']">{{ locale.ForgetPass }}</pa-link>
+</div>
+<pa-global-error>
+</pa-global-error>
+<pa-button
+  [async]="loading"
+  [disabled]="!dynamicForm?.form?.valid"
+  (clicked)="send()">
+  {{ locale.Enter }}
+</pa-button>
